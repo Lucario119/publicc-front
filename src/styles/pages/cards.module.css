@@ -19,17 +19,18 @@
   justify-content: center;
 }
 .card {
-  background: url('../../assets/cardqualquer.png') no-repeat;
-  width: 20rem;
-  height: 28rem;
-  /* background-size: 100%; */
+  width: 18rem;
+  height: 25rem;
+  background-color: blue;
+  position: absolute;
+  animation: myfirst 1s;
+
+  animation-direction: normal;
 }
 .dropzone {
-  background: url('../../assets/backgroundqualquer.png') no-repeat;
   background: #f0f0f0;
   width: 30rem;
   height: 35rem;
-  /* background-size: 100%; */
 
   padding: 1rem;
 }
@@ -52,18 +53,32 @@
   color: transparent;
   text-shadow: 0 0 8px #000;
 }
-.deleteCard {
-  display: none;
-}
 .card2 {
-  background: url('../../assets//cor2.png') no-repeat;
-  width: 20rem;
-  height: 28rem;
-  /* background-size: 100%; */
+  /* background: url('../../assets//cor2.png') no-repeat; */
+  background-color: red;
+  width: 18rem;
+  height: 25rem;
+  animation: myfirst 1s;
+  position: absolute;
+
+  animation-direction: normal;
 }
 .card3 {
-  background: url('../../assets/cor3.png') no-repeat;
-  width: 20rem;
-  height: 28rem;
-  /* background-size: 100%,100% cover; */
+  /* background: url('../../assets/cor3.png') no-repeat; */
+  background-color: black;
+  width: 18rem;
+  height: 25rem;
+  position: absolute;
+  animation: myfirst 1s;
+
+  animation-direction: normal;
+}
+@keyframes myfirst {
+  0% {
+    left: 0%;
+  }
+
+  100% {
+    left: 14.5%;
+  }
 }
