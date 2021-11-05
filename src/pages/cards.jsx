@@ -1,12 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styles from '../styles/pages/cards.module.css';
-import {
-  Draggable,
-  Droppable,
-  DragDropContext,
-  DropResult,
-} from 'react-beautiful-dnd';
+import { Draggable, Droppable, DragDropContext } from 'react-beautiful-dnd';
 import Asset1 from '../assets/Sem títulodfdf.png';
+import RightArrowIcon from '../assets/right-arrow-svgrepo-com.svg';
 import Image from 'next/image';
 
 function Cards() {
@@ -25,35 +21,44 @@ function Cards() {
     },
   ];
 
-  const [isDragging, setIsDragging] = useState(false);
   const [isDragEnded, setIsDragEnded] = useState(false);
   const [items, setItems] = useState([]);
   const [items2, setItems2] = useState([]);
+  const itemsEndRef = useRef(null);
+  const ref = useRef();
+  const [arrowPosition, setArrowPosition] = useState({});
+
+  const scrollToBottom = () => {
+    itemsEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+  const set = () =>
+    ref && ref.current ? ref.current.getBoundingClientRect().top : {};
 
   useEffect(() => {
     setItems(cards);
-  }, []);
+    scrollToBottom();
+  }, [items2]);
 
-  function dragState() {
-    !isDragging ? setIsDragging(true) : setIsDragging(false);
-  }
-  function onDragEnd(id) {
+  function onDragEnd(id, e) {
     items.splice(id, 1);
-
     if (items.length === 0) {
       const newArray = [...cards];
 
       setItems(newArray);
     }
-    if (items2.length < 7) {
-      items2.push(1);
-    }
+    setArrowPosition(set());
+    setItems2([...items2, e]);
     setIsDragEnded(true);
   }
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className={styles.cardsContainer}>
+        {/* <Image
+          onClick={(id) => items.splice(id, 1)}
+          src={RightArrowIcon}
+          alt="jj"
+        /> */}
         <Droppable droppableId="droppable">
           {(provided) => (
             <div
@@ -72,7 +77,6 @@ function Cards() {
                       <div
                         key={item.id}
                         id={item.id}
-                        onDrag={dragState}
                         className={item.className}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
@@ -90,33 +94,48 @@ function Cards() {
         <div className={styles.dropzoneContainer}>
           <Droppable droppableId="trashbin">
             {(provided) => (
-              <div
-                className={styles.dropzone}
-                ref={provided.innerRef}
-                {...provided.droppableProps}
-              >
-                <div>
-                  {isDragEnded && (
-                    <h1 className={styles.blur}>
-                      PRIMEIRA AÇÃO DE CHAMAR .FICA EM MODO BLUR ASSIM QUE
-                      SOLTAR
-                    </h1>
-                  )}
+              <>
+                <div
+                  className={styles.image_wrapper}
+                  style={{ top: arrowPosition }}
+                >
+                  <Image
+                    src={RightArrowIcon}
+                    alt="rightarrow"
+                    width={25}
+                    height={25}
+                  />
                 </div>
-                <Image src={Asset1} alt="asset" width={1000} height={100} />
-                {items2.map((e, i) => (
-                  <div key={i}>
-                    {[...Array(1)].map((e, i) => (
-                      <>
-                        <span key={i} className={styles.blur}>
+                <div
+                  className={styles.dropzone}
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                >
+                  <div>
+                    {isDragEnded && (
+                      <h1 className={styles.blur}>
+                        PRIMEIRA AÇÃO DE CHAMAR .FICA EM MODO BLUR ASSIM QUE
+                        SOLTAR
+                      </h1>
+                    )}
+                  </div>
+                  <div>
+                    <Image src={Asset1} alt="asset" width={1000} height={100} />
+                  </div>
+
+                  <div className={styles.scroll}>
+                    {items2.map((id) => (
+                      <div ref={ref} key={id} className={styles.dropzone_div}>
+                        <span key={id} className={styles.blur}>
                           PRIMEIRA AÇÃO DE CHAMAR .FICA EM MODO BLUR ASSIM QUE
                           SOLTAR
                         </span>
-                      </>
+                      </div>
                     ))}
+                    <div ref={itemsEndRef} />
                   </div>
-                ))}
-              </div>
+                </div>
+              </>
             )}
           </Droppable>
         </div>

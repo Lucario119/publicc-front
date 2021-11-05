@@ -15,7 +15,7 @@
 .dropzoneContainer {
   flex: 1;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 .card {
@@ -31,20 +31,22 @@
   background: #f0f0f0;
   width: 30rem;
   height: 35rem;
+  display: flex;
+  flex-direction: column;
 
+  align-items: center;
   padding: 1rem;
 }
 
-.dropzone div:first-child {
+.dropzone div:first-of-type {
   background-color: red;
   width: 100%;
   height: 3rem;
 }
-.dropzone div {
+.dropzone_div {
   background-color: blue;
   width: 100%;
   height: 3rem;
-  margin: 0.5rem 0;
 }
 .dropzone div h1 {
   font-size: 2ch;
@@ -72,6 +74,30 @@
   animation: myfirst 1s;
 
   animation-direction: normal;
+}
+.scroll {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: auto;
+  overflow-y: auto;
+}
+
+.image_wrapper {
+  animation: blink 1s linear infinite;
+  margin: 1.5rem 1rem 0 0;
+  position: relative;
+}
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 @keyframes myfirst {
   0% {
