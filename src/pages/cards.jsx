@@ -3,9 +3,18 @@ import styles from '../styles/pages/cards.module.css';
 import { Draggable, Droppable, DragDropContext } from 'react-beautiful-dnd';
 import Asset1 from '../assets/Sem títulodfdf.png';
 import RightArrowIcon from '../assets/right-arrow-svgrepo-com.svg';
+import LeftArrowIcon from '../assets/left-arrow-svgrepo-com.svg';
 import Image from 'next/image';
 
 function Cards() {
+  const [isDragEnded, setIsDragEnded] = useState(false);
+
+  const [items, setItems] = useState([]);
+  const [items2, setItems2] = useState([]);
+  const itemsEndRef = useRef();
+  const ref = useRef();
+  const [arrowPosition, setArrowPosition] = useState();
+
   const cards = [
     {
       id: 0,
@@ -21,44 +30,43 @@ function Cards() {
     },
   ];
 
-  const [isDragEnded, setIsDragEnded] = useState(false);
-  const [items, setItems] = useState([]);
-  const [items2, setItems2] = useState([]);
-  const itemsEndRef = useRef(null);
-  const ref = useRef();
-  const [arrowPosition, setArrowPosition] = useState({});
+  useEffect(() => {
+    setItems(cards);
+  }, []);
+  useEffect(() => {
+    scrollToBottom();
+  }, [items2]);
 
   const scrollToBottom = () => {
     itemsEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
   const set = () =>
     ref && ref.current ? ref.current.getBoundingClientRect().top : {};
+  const dropRemoveElement = () => {
+    items.splice(0, 1);
+  };
 
-  useEffect(() => {
-    setItems(cards);
-    scrollToBottom();
-  }, [items2]);
-
-  function onDragEnd(id, e) {
-    items.splice(id, 1);
+  function onDragEnd(e) {
+    dropRemoveElement();
     if (items.length === 0) {
       const newArray = [...cards];
 
       setItems(newArray);
     }
-    setArrowPosition(set());
     setItems2([...items2, e]);
-    setIsDragEnded(true);
-  }
 
+    setArrowPosition(set());
+
+    setIsDragEnded(true);
+    console.log(items2);
+  }
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className={styles.cardsContainer}>
-        {/* <Image
-          onClick={(id) => items.splice(id, 1)}
-          src={RightArrowIcon}
-          alt="jj"
-        /> */}
+        <button onClick={dropRemoveElement}>
+          <Image src={LeftArrowIcon} alt="leftarrow" width={55} height={55} />
+        </button>
+
         <Droppable droppableId="droppable">
           {(provided) => (
             <div
@@ -97,7 +105,7 @@ function Cards() {
               <>
                 <div
                   className={styles.image_wrapper}
-                  style={{ top: arrowPosition }}
+                  style={{ top: items2.length >= 8 ? 480 : arrowPosition }}
                 >
                   <Image
                     src={RightArrowIcon}
@@ -123,23 +131,27 @@ function Cards() {
                     <Image src={Asset1} alt="asset" width={1000} height={100} />
                   </div>
 
-                  <div className={styles.scroll}>
-                    {items2.map((id) => (
-                      <div ref={ref} key={id} className={styles.dropzone_div}>
-                        <span key={id} className={styles.blur}>
-                          PRIMEIRA AÇÃO DE CHAMAR .FICA EM MODO BLUR ASSIM QUE
-                          SOLTAR
-                        </span>
-                      </div>
-                    ))}
-                    <div ref={itemsEndRef} />
-                  </div>
+                  {/* <div className={styles.scroll}> */}
+                  {items2.map((item) => (
+                    <div
+                      ref={ref}
+                      key={item.id}
+                      className={styles.dropzone_card}
+                    >
+                      <span key={item.id} className={styles.blur}>
+                        PRIMEIRA AÇÃO DE CHAMAR .FICA EM MODO BLUR ASSIM QUE
+                        SOLTAR
+                      </span>
+                    </div>
+                  ))}
+                  <div ref={itemsEndRef} />
                 </div>
+                {/* {provided.placeholder} */}
+                {/* </div> */}
               </>
             )}
           </Droppable>
         </div>
-        {/* {provided.placeholder} */}
       </div>
     </DragDropContext>
   );
