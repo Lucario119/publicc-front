@@ -1,6 +1,7 @@
 import React from 'react';
 import { BuyingCard } from '../components/buyingCard';
-import { CreditCard } from '../components/creditCard';
+import { Forms } from '../components/forms';
+
 import { RegisterData } from '../components/registerdata';
 import styles from '../styles/pages/landingPage.module.css';
 
@@ -8,7 +9,7 @@ function LandingPage() {
   return (
     <section className={styles.landingPageContainer}>
       <RegisterData />
-      <CreditCard />
+      <Forms />
       <BuyingCard />
     </section>
   );

@@ -99,9 +99,9 @@ function Cards() {
         </Droppable>
 
         <div />
-        <div className={styles.dropzoneContainer}>
-          <Droppable droppableId="trashbin">
-            {(provided) => (
+        <Droppable droppableId="trashbin" direction>
+          {(provided) => (
+            <div className={styles.dropzoneContainer}>
               <>
                 <div
                   className={styles.image_wrapper}
@@ -149,9 +149,9 @@ function Cards() {
                 {/* {provided.placeholder} */}
                 {/* </div> */}
               </>
-            )}
-          </Droppable>
-        </div>
+            </div>
+          )}
+        </Droppable>
       </div>
     </DragDropContext>
   );
