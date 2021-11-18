@@ -1,0 +1,138 @@
+.cadastroFormsContainer {
+  padding: 0 0 2rem 0;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+.cadastroFormsHeader {
+  display: flex;
+}
+.cadastroFormsHeader button {
+  height: 3rem;
+  width: 10rem;
+
+  align-items: center;
+  justify-content: center;
+}
+.loginFormContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0 2rem;
+}
+
+.separator {
+  font-size: 1rem;
+  color: #50aaff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.separator::after {
+  content: '';
+  height: 1px;
+  width: 8rem;
+  margin-left: 1rem;
+  background-color: #d4d4d4;
+}
+.separator::before {
+  content: '';
+  height: 1px;
+  width: 8rem;
+  margin-right: 1rem;
+  background-color: #d4d4d4;
+}
+.loginWithContainer {
+  display: flex;
+  gap: 1rem;
+
+  margin-top: 1rem;
+  justify-content: center;
+}
+.loginWithContainer button {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 15rem;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  padding: 0.3rem 0 0.2rem 0.5rem;
+  cursor: pointer;
+}
+/* .loginWithContainer button:first-child {
+
+}
+.loginWithContainer button:last-child {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+} */
+.loginFormContent fieldset {
+  width: 100%;
+  text-align: end;
+}
+.loginFormContent fieldset span {
+  font-size: 0.8rem;
+  color: #ff4842;
+  cursor: pointer;
+}
+.loginFormContent fieldset div {
+  display: flex;
+  flex-direction: column;
+  text-align: end;
+  gap: 0.8rem;
+}
+.loginFormContent fieldset button {
+  width: 100%;
+  background-color: #ff933a;
+  padding: 0.7rem 0;
+  color: white;
+}
+.active {
+  border-bottom: 2px solid #77baf8;
+}
+.signUpFormContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0 2rem;
+}
+.signUpFormContent fieldset {
+  width: 100%;
+  text-align: end;
+}
+.signUpFormContent fieldset span {
+  font-size: 0.8rem;
+  color: #ff4842;
+  cursor: pointer;
+}
+.inputsNbuttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.signUpFormContent fieldset button {
+  width: 100%;
+  background-color: #ff933a;
+  padding: 0.7rem 0;
+  color: white;
+}
+.checkBoxes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.checkBoxes div button {
+  width: 1.5rem;
+
+  background: none;
+  border: 1px solid #000;
+  margin-right: 0.6rem;
+}
+.checkBoxes div {
+  display: flex;
+  align-items: center;
+}
+.checkBoxes p {
+  color: rgb(255, 50, 50);
+  margin-left: 4px;
+}
